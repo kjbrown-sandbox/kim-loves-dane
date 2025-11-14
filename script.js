@@ -26,7 +26,39 @@ document.addEventListener("DOMContentLoaded", () => {
    document.body.style.backgroundColor = selectedBackground;
 
    const messageElement = document.getElementById("message");
-   if (messageElement) {
-      messageElement.textContent = selectedMessage;
+   if (!messageElement) {
+      return;
    }
+
+   const HEART_EMOJI = "💚";
+   const FADE_DURATION_MS = 900;
+   const HEART_VISIBILITY_MS = 1000;
+   const prefersReducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+
+   const reveal = (text) => {
+      messageElement.textContent = text;
+      requestAnimationFrame(() => {
+         messageElement.classList.add("is-visible");
+      });
+   };
+
+   const conceal = () => {
+      messageElement.classList.remove("is-visible");
+   };
+
+   if (prefersReducedMotion) {
+      messageElement.textContent = selectedMessage;
+      messageElement.classList.add("is-visible");
+      return;
+   }
+
+   messageElement.textContent = HEART_EMOJI;
+   messageElement.classList.add("is-visible");
+
+   window.setTimeout(() => {
+      conceal();
+      window.setTimeout(() => {
+         reveal(selectedMessage);
+      }, FADE_DURATION_MS);
+   }, HEART_VISIBILITY_MS);
 });

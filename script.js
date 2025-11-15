@@ -16,6 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "Kim needs Dane to reach the top shelves.",
       "Kim needs Dane to reach the middle shelves.",
       "Dane is patient as Kim tries out all the new clothes.",
+      "He makes sure I don't overwork myself. Or tries to, at least.",
+      "Dane is my favorite notification.",
+      "I would share my fries with you.",
+      "I love you.",
    ];
 
    const pickRandom = (items) => items[Math.floor(Math.random() * items.length)];
